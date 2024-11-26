@@ -28,7 +28,8 @@
                     <div class="navbar-nav mr-auto">
                         <a class="nav-item nav-link" href="{% url 'itreporting:home' %}">Home</a>
                         <a class="nav-item nav-link" href="{% url 'itreporting:about' %}">About</a>
-                        <a class="nav-item nav-link" href="#">Report</a>
+                        <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                        <a class="nav-item nav-link" href="{% url 'itreporting:report' %}">View Reported Issues</a>
                         <a class="nav-item nav-link" href="{% url 'itreporting:contact' %}">Contact</a>
                     </div>
                     <!-- Navbar Right Side -->
@@ -36,14 +37,15 @@
                         <div class="navbar-nav">
                             {% if user.is_authenticated %}
                             <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
-                            <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+                            <a class="nav-item nav-link" href="{% url 'itreporting:issue-create' %}">Report New Issue</a>
+                            <form action="{% url 'logout' %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="nav-item nav-link btn btn-link">Logout</button>
+                            </form>
                             {% else %}
-                            <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
                             <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
                             {% endif %}
-                        </div>
-                                            
-                        
+                        </div> 
                     </div>
                 </div>
                 </div>
