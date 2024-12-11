@@ -4,9 +4,30 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
+import requests
 
 def home(request):
-    return render(request, 'itreporting/home.html', {'title':'Welcome'})
+    url = 'https://api.openweathermap.org/data/2.5/weather?q={},{}&units=metric&appid={}'
+    cities = [('Sheffield', 'UK'), ('London', 'UK'), ('Manchester', 'UK')]
+    weather_data = []
+
+    api_key = '0489486cfde84063e28fdde7ac74e8a8'
+
+    for city in cities:
+        # Request the API data and convert the JSON to Python data types
+        city_weather = requests.get(url.format(city[0], city[1], api_key)).json()
+        # Safely create weather dictionary (use .get() for robustness)
+        weather = {
+
+            'city': city_weather.get('name', 'N/A') + ', ' + city_weather.get('sys', {}).get('country', 'N/A'),
+
+            'temperature': city_weather.get('main', {}).get('temp', 'N/A'),
+
+            'description': city_weather.get('weather', [{}])[0].get('description', 'No description')
+        }
+        # Append data for the current city
+        weather_data.append(weather)
+    return render(request, 'itreporting/home.html', {'title': 'Homepage', 'weather_data': weather_data})
     
 def about(request):
     return render(request, 'itreporting/about.html', {'title':'about'})
