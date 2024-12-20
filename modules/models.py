@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User, Group
 from datetime import date
+from courses.models import Course
 
 class Module(models.Model):
 
@@ -14,7 +15,7 @@ class Module(models.Model):
     #category =
     description = models.TextField(default=None, blank=True, null=True)
     available = models.CharField(choices=AVAILABILITY_OPTIONS, max_length=200)
-    #courses =
+    courses = models.ManyToManyField(Course, blan=True)
     #enrolled_students = 
 
     def str(self):
