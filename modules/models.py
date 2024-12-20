@@ -15,7 +15,7 @@ class Module(models.Model):
     #category =
     description = models.TextField(default=None, blank=True, null=True)
     available = models.CharField(choices=AVAILABILITY_OPTIONS, max_length=200)
-    courses = models.ManyToManyField(Course, blan=True)
+    courses = models.ManyToManyField(Course, blank=True)
     #enrolled_students = 
 
     def str(self):
