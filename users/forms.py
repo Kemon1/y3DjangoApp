@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile
+from .models import Student
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField(label='Email address', help_text='Your SHU email address.')
@@ -18,5 +18,5 @@ class UserUpdateForm(forms.ModelForm):
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
-        model = Profile
-        fields = ['image']
+        model = Student
+        fields = ['date_of_birth', 'address', 'city', 'country', 'image']
