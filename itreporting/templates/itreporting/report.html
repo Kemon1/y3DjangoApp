@@ -3,10 +3,10 @@
 <h1>Issues Reported</h1>
     {% for issue in issues %}
     <article class="media content-section">
-        <img class="rounded-circle article-img" src="{{ issue.author.profile.image.url }}"/>
+        <img class="rounded-circle article-img" src="{{ issue.author.student.image.url }}"/>
         <div class="media-body">
            <div class="article-metadata">
-              <a class="mr-2" href="{% url 'itreporting:user-issues' issue.author.username %}">{{ issue.author.profile }}</a>
+              <a class="mr-2" href="{% url 'itreporting:user-issues' issue.author.username %}">{{ issue.author.student }}</a>
               <small class="text-muted">{{ issue.date_submitted }}</small>
            </div>
            <h2><a class="article-title" href="{% url 'itreporting:issue-detail' issue.id %}">{{ issue }}</a></h2>

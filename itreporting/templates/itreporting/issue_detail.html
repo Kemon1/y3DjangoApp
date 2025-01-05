@@ -11,7 +11,7 @@
         <article class="media content-section">
             <div class="media-body">
                 <div class="article-metadata">
-                    <a class="mr-2" href="#">{{ object.author.profile }}</a>
+                    <a class="mr-2" href="{% url 'itreporting:user-issues' issue.author.username %}">{{ object.author.student }}</a>
                     <small class="text-muted">{{ object.date_submitted }}</small>
                 </div>
                 <h2 class="article-title">{{ object.type    }} Issue in Room {{object.room}}</h2>
