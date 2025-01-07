@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap4',
     'modules.apps.ModulesConfig',
     'courses.apps.CoursesConfig',
+    'registrations.apps.RegistrationsConfig',
 ]
 
 MIDDLEWARE = [

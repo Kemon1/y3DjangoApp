@@ -12,17 +12,12 @@ class Module(models.Model):
 
     name = models.CharField(max_length=200, blank=False, null=False)
     code = models.CharField(max_length=200, blank=False, null=False)
-    #category =
+    category = models.CharField(max_length=200, blank=False, null=False)
     description = models.TextField(default=None, blank=True, null=True)
     available = models.CharField(choices=AVAILABILITY_OPTIONS, max_length=200)
     courses = models.ManyToManyField(Course, blank=True)
-    #enrolled_students = 
+    
 
     def str(self):
         return f'{self.name}'
     
-class Registration(models.Model):
-
-    #student =
-    module = models.ManyToManyField(Module ,blank=True)
-    registration_date = models.DateField(date.today) 

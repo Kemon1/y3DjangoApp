@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_list_or_404
+from courses.models import Course
 
 #class Profile(models.Model):
 
@@ -20,15 +21,8 @@ class Student(models.Model):
     city = models.CharField(max_length=100, null=True, blank=True)
     country = models.CharField(max_length=200, null=True, blank=True)
     image = models.ImageField(default='profile_pics/default_ZX96haY.jpg', upload_to='profile_pics')
+    course = models.ManyToManyField(Course, related_name="students")
 
     def __str__(self):
         return f'{self.user.username}'
     
-# def student_profile(sender, instance, created, **kwargs):
-#     if created:
-#         user_Student = Student(user=instance)
-#         user_Student.save()
-
-#         return user_Student
-    
-# post_save.connect(student_profile, sender=User)
