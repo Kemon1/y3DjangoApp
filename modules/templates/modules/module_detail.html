@@ -1,0 +1,36 @@
+{% extends "itreporting/base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Module Detail</title>
+</head>
+<body>
+    <h1>Module Detail</h1>
+
+        <article class="media content-section">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <small class="text-muted">{{ object.code }}</small>
+                </div>
+                <h2 class="article-title">{{ object.name}}</h2>
+                <p class="article-content">{{ object.description }}</p>
+            </div>
+        </article>
+        <div class="m-5 text-center">
+            {% if user.is_authenticated %}
+                {% if module.available == 'OPEN' %}
+                    <form action="{% url 'enroll-in-module' module.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary btn-lg px-5 py-3">Enroll in this Module</button>
+                    </form>
+                {% else %}
+                    <p class="text-danger fs-4">This module is currently closed for enrollment.</p>
+                {% endif %}
+            {% else %}
+                <p class="text-muted fs-4">Log in to enroll.</p>
+            {% endif %}
+        </div>
+</body>
+</html>
+{% endblock %}

@@ -7,7 +7,7 @@ from datetime import date
 class Registration(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, blank=False, null=False)
     module = models.ForeignKey(Module ,on_delete=models.CASCADE, blank=False, null=False)
-    registration_date = models.DateField(date.today) 
+    registration_date = models.DateField(auto_now_add=True, null=True, blank=True) 
 
     class Meta:
         unique_together = ('student', 'module')
