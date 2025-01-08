@@ -1,10 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Issue
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 import requests
+from django.contrib import messages
+from .forms import ContactForm
 
 def home(request):
     url = 'https://api.openweathermap.org/data/2.5/weather?q={},{}&units=metric&appid={}'
@@ -32,8 +34,26 @@ def home(request):
 def about(request):
     return render(request, 'itreporting/about.html', {'title':'about'})
 
-def contact(request):
-    return render(request, 'itreporting/contact.html', {'title':'conact'})    
+class ContactFormView(FormView):
+    form_class = ContactForm
+    template_name = 'itreporting/contact.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ContactFormView, self).get_context_data(**kwargs)
+        context.update({'title': 'Contact Us'})
+        return context
+
+    def form_valid(self, form):
+        form.send_mail()
+        messages.success(self.request, 'Successfully sent the enquiry')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.warning(self.request, 'Unable to send the enquiry')
+        return super().form_invalid(form)
+
+    def get_success_url(self):
+        return self.request.path    
 
 def report(request):
     daily_report = {'issues': Issue.objects.all(), 'title': 'Issues Reported'}
