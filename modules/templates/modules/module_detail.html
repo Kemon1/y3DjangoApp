@@ -7,16 +7,17 @@
 </head>
 <body>
     <h1>Module Detail</h1>
-
-        <article class="media content-section">
-            <div class="media-body">
-                <div class="article-metadata">
-                    <small class="text-muted">{{ object.code }}</small>
-                </div>
-                <h2 class="article-title">{{ object.name}}</h2>
-                <p class="article-content">{{ object.description }}</p>
-            </div>
-        </article>
+    <article class="media content-section">
+        <div class="media-body">
+           <div class="article-metadata">
+              <small>MODULE CODE: {{ object.code }}</small>
+              <small class="text-muted"> {{ object.category }}</small>
+           </div>
+           <h2>{{ object.name }}</h2>
+           <p class="article-content">AVAILABILITY: {{ object.available }}</p>
+           <p class="article-content">Description: {{ object.description }}</p>
+        </div>
+     </article>
         <div class="m-5 text-center">
             {% if user.is_authenticated %}
                 {% if module.available == 'OPEN' %}

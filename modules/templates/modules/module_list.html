@@ -5,11 +5,12 @@
     <article class="media content-section">
         <div class="media-body">
            <div class="article-metadata">
-              <small>CODE: {{ module.code }}</small>
+              <small>MODULE CODE: {{ module.code }}</small>
               <small class="text-muted"> {{ module.category }}</small>
            </div>
            <h2><a class="article-title" href="{% url 'module-detail' module.id %}">{{ module.name }}</a></h2>
-           <p class="article-content">{{ module.description }}</p>
+           <p class="article-content">AVAILABILITY: {{ module.available }}</p>
+           <p class="article-content">Description: {{ module.description }}</p>
         </div>
      </article>
      {% endfor %}

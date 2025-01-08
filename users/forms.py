@@ -19,4 +19,4 @@ class UserUpdateForm(forms.ModelForm):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ['date_of_birth', 'address', 'city', 'country', 'image']
+        fields = ['date_of_birth', 'address', 'city', 'country', 'image', 'course']
